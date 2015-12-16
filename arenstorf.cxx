@@ -166,6 +166,8 @@ int main(void){
     t += dt;
     ind++;
   }
+  
+  cout << ind << " Schritte geschrieben." << endl; // debug
          
   Ausg.close();
   return 0;
