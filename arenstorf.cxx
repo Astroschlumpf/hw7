@@ -62,7 +62,7 @@ void vecDoPr(void(*vecDiv)(double*, double, double*, double),
   double kE[6] = {0.,0.,0.,0.,0.,0.}; // Kopie 4 der urspr...
   double kF[6] = {0.,0.,0.,0.,0.,0.}; // Kopie 5 der urspr...
   double kG[6] = {0.,0.,0.,0.,0.,0.}; // Kopie 6 der urspr... -> "RK7"
-  double tmpV[3]; // Kopie zu "RK6" fuer anschliessende dt-Berechnung
+  double tmpV[6]; // Kopie zu "RK6" fuer anschliessende dt-Berechnung
   // Die Konstruktion ueber sechs verschiedene k[] kann sicher optimiert werden,
   // mir fehlte bei jedem meiner Versuche dabei die Uebersicht
 
@@ -155,13 +155,13 @@ int main(void){
   double Yps[6]; // Yps = {[x,x'][y,y'][z,z']}
   // initiale Werte x(0), y(0) und z(0)
   Yps[0] = 0.994; Yps[1] = 0.; Yps[2] = 0.; Yps[3] = -2.00158510637908; Yps[4] = 0.; Yps[5] = 0.;
-
-  cout << t << "\t" << Yps[0] << "\t" << Yps[2] << endl; // t, x, y; ohne z
   
-  while((t < 35.0) && (ind < 10000)){ // 35 als Endpunkt, ind als Fehlerkorrektur
-    vecDoPr(vecDiv, &dt, t, Yps, MU, EPS); // Runge-Kutta aufrufen inklusive Schrittlaengenberechnung
+  Ausg << t << "\t" << Yps[0] << "\t" << Yps[2] << endl; // t, x, y; ohne z
+
+  while((t < 17.1) && (ind < 3000000)){ // 35 als Endpunkt, ind als Fehlerkorrektur
+    vecDoPr(vecDiv, &dt, t, Yps, MU, EPS); // Runge-Kutta aufrufen inklusive Schrittlaengenberechnung   
+    // cout << ind << endl; // debug
     // cout << t << "\t" << Yps[0] << "\t" << Yps[2] << endl; // t | x | y   ausgeben
-    // cout << ind << "\t" << t << "\t" << Yps[0] << "\t" << Yps[2] << endl; // t | x | y   ausgeben ... inklusive debug
     Ausg << t << "\t" << Yps[0] << "\t" << Yps[2] << endl; // t | x | y   ausgeben
     t += dt;
     ind++;
